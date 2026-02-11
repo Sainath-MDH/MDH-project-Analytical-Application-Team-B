@@ -97,12 +97,19 @@
             transform: scale(1.15);
         }
 
+        .btn-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
         .btn {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 1.25rem 3.5rem;
-            font-size: 1.1rem;
+            padding: 1rem 2.5rem;
+            font-size: 2rem;
+            line-height: 1;
             font-weight: 500;
             border-radius: 16px;
             cursor: pointer;
@@ -155,16 +162,19 @@
         <div class="counter-wrapper">
             <span id="count" class="counter-display">0</span>
         </div>
-        <button id="increment-btn" class="btn" type="button">Tap to Count</button>
+        <div class="btn-group">
+            <button id="decrement-btn" class="btn" type="button" aria-label="Decrease count">−</button>
+            <button id="increment-btn" class="btn" type="button" aria-label="Increase count">+</button>
+        </div>
     </main>
 
     <script>
         const countDisplay = document.getElementById('count');
         const incrementBtn = document.getElementById('increment-btn');
+        const decrementBtn = document.getElementById('decrement-btn');
         let count = 0;
 
-        incrementBtn.addEventListener('click', () => {
-            count++;
+        function updateDisplay() {
             countDisplay.innerText = count;
 
             // Trigger animation
@@ -172,6 +182,16 @@
             // Force reflow
             void countDisplay.offsetWidth;
             countDisplay.classList.add('bump');
+        }
+
+        incrementBtn.addEventListener('click', () => {
+            count++;
+            updateDisplay();
+        });
+
+        decrementBtn.addEventListener('click', () => {
+            count--;
+            updateDisplay();
         });
     </script>
 </body>
