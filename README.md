@@ -19,16 +19,18 @@ This project provides an interactive dashboard to analyze bike theft data, ident
     pip install -r requirements.txt
     ```
 
-2.  **Run the Dashboard**:
-    ```bash
-    streamlit run dashboard.py
-    ```
+2.  **Run the Agents**:
+    - Data Agent: `python data_agent.py`
+    - Analytics Agent: `python analytics_agent.py`
+    - Insights Agent: `python insights_agent.py`
 
 3.  **Data Source**:
-    - The dashboard automatically looks for `3 Bike Thefts  FINAL EXCEL.xlsx` in the root directory.
-    - You can also upload your own Excel (`.xlsx`) or CSV (`.csv`) file via the sidebar.
+    - The dashboard automatically looks for `3_Bike_Thefts_FINAL_EXCEL.xlsx` in the root directory.
 
 ## Project Structure
-- `dashboard.py`: Main application logic.
+- `data_agent.py`: Data cleaning and standardization.
+- `analytics_agent.py`: Metric calculation and trend analysis.
+- `insights_agent.py`: Natural language insights generation.
 - `requirements.txt`: Python dependencies.
-- `3 Bike Thefts  FINAL EXCEL.xlsx`: Default dataset.
+- `3_Bike_Thefts_FINAL_EXCEL.xlsx`: Default dataset.
+- `data/`: Directory for intermediate JSON results.

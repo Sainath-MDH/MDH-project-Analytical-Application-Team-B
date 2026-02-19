@@ -1,0 +1,441 @@
+{
+  "total_incidents": 59707,
+  "total_damage": 73098466.0,
+  "avg_damage": 1224.286365082821,
+  "monthly_trend": [
+    {
+      "start_date": "2023-01",
+      "damage": 1721204,
+      "district": 1409
+    },
+    {
+      "start_date": "2023-02",
+      "damage": 1628109,
+      "district": 1334
+    },
+    {
+      "start_date": "2023-03",
+      "damage": 1962593,
+      "district": 1666
+    },
+    {
+      "start_date": "2023-04",
+      "damage": 1651239,
+      "district": 1491
+    },
+    {
+      "start_date": "2023-05",
+      "damage": 2398738,
+      "district": 2223
+    },
+    {
+      "start_date": "2023-06",
+      "damage": 2619858,
+      "district": 2433
+    },
+    {
+      "start_date": "2023-07",
+      "damage": 2550989,
+      "district": 2327
+    },
+    {
+      "start_date": "2023-08",
+      "damage": 2457467,
+      "district": 2137
+    },
+    {
+      "start_date": "2023-09",
+      "damage": 2795229,
+      "district": 2418
+    },
+    {
+      "start_date": "2023-10",
+      "damage": 2229305,
+      "district": 1903
+    },
+    {
+      "start_date": "2023-11",
+      "damage": 1895668,
+      "district": 1552
+    },
+    {
+      "start_date": "2023-12",
+      "damage": 1163442,
+      "district": 905
+    },
+    {
+      "start_date": "2024-01",
+      "damage": 1323310,
+      "district": 1054
+    },
+    {
+      "start_date": "2024-02",
+      "damage": 1742014,
+      "district": 1342
+    },
+    {
+      "start_date": "2024-03",
+      "damage": 2175704,
+      "district": 1651
+    },
+    {
+      "start_date": "2024-04",
+      "damage": 2239560,
+      "district": 1876
+    },
+    {
+      "start_date": "2024-05",
+      "damage": 2637686,
+      "district": 2172
+    },
+    {
+      "start_date": "2024-06",
+      "damage": 2666139,
+      "district": 2174
+    },
+    {
+      "start_date": "2024-07",
+      "damage": 2685723,
+      "district": 2117
+    },
+    {
+      "start_date": "2024-08",
+      "damage": 2396986,
+      "district": 1892
+    },
+    {
+      "start_date": "2024-09",
+      "damage": 2766866,
+      "district": 2155
+    },
+    {
+      "start_date": "2024-10",
+      "damage": 2505484,
+      "district": 1833
+    },
+    {
+      "start_date": "2024-11",
+      "damage": 2013740,
+      "district": 1472
+    },
+    {
+      "start_date": "2024-12",
+      "damage": 1422763,
+      "district": 1047
+    },
+    {
+      "start_date": "2025-01",
+      "damage": 1547578,
+      "district": 1152
+    },
+    {
+      "start_date": "2025-02",
+      "damage": 1164496,
+      "district": 939
+    },
+    {
+      "start_date": "2025-03",
+      "damage": 1877712,
+      "district": 1542
+    },
+    {
+      "start_date": "2025-04",
+      "damage": 2045427,
+      "district": 1600
+    },
+    {
+      "start_date": "2025-05",
+      "damage": 2578594,
+      "district": 1939
+    },
+    {
+      "start_date": "2025-06",
+      "damage": 2255493,
+      "district": 1856
+    },
+    {
+      "start_date": "2025-07",
+      "damage": 2154724,
+      "district": 1790
+    },
+    {
+      "start_date": "2025-08",
+      "damage": 1612102,
+      "district": 1348
+    },
+    {
+      "start_date": "2025-09",
+      "damage": 1776984,
+      "district": 1541
+    },
+    {
+      "start_date": "2025-10",
+      "damage": 1549347,
+      "district": 1272
+    },
+    {
+      "start_date": "2025-11",
+      "damage": 1647696,
+      "district": 1225
+    },
+    {
+      "start_date": "2025-12",
+      "damage": 1238497,
+      "district": 920
+    }
+  ],
+  "top_hotspots": [
+    {
+      "district": "Mitte",
+      "count": 9953
+    },
+    {
+      "district": "Friedrichshain-Kreuzberg",
+      "count": 8407
+    },
+    {
+      "district": "Pankow",
+      "count": 7166
+    },
+    {
+      "district": "Charlottenburg-Wilmersdorf",
+      "count": 6009
+    },
+    {
+      "district": "Tempelhof-Sch\u00f6neberg",
+      "count": 5580
+    },
+    {
+      "district": "Treptow-K\u00f6penick",
+      "count": 4683
+    },
+    {
+      "district": "Neuk\u00f6lln",
+      "count": 4674
+    },
+    {
+      "district": "Steglitz-Zehlendorf",
+      "count": 3785
+    },
+    {
+      "district": "Lichtenberg",
+      "count": 3704
+    },
+    {
+      "district": "Reinickendorf",
+      "count": 2460
+    }
+  ],
+  "weekday_distribution": [
+    {
+      "weekday": "Monday",
+      "count": 8889
+    },
+    {
+      "weekday": "Tuesday",
+      "count": 8871
+    },
+    {
+      "weekday": "Wednesday",
+      "count": 9092
+    },
+    {
+      "weekday": "Thursday",
+      "count": 8955
+    },
+    {
+      "weekday": "Friday",
+      "count": 9399
+    },
+    {
+      "weekday": "Saturday",
+      "count": 7902
+    },
+    {
+      "weekday": "Sunday",
+      "count": 6599
+    }
+  ],
+  "hourly_distribution": [
+    {
+      "hour": 0,
+      "count": 0
+    },
+    {
+      "hour": 1,
+      "count": 0
+    },
+    {
+      "hour": 2,
+      "count": 0
+    },
+    {
+      "hour": 3,
+      "count": 0
+    },
+    {
+      "hour": 4,
+      "count": 0
+    },
+    {
+      "hour": 5,
+      "count": 0
+    },
+    {
+      "hour": 6,
+      "count": 0
+    },
+    {
+      "hour": 7,
+      "count": 0
+    },
+    {
+      "hour": 8,
+      "count": 0
+    },
+    {
+      "hour": 9,
+      "count": 0
+    },
+    {
+      "hour": 10,
+      "count": 0
+    },
+    {
+      "hour": 11,
+      "count": 0
+    },
+    {
+      "hour": 12,
+      "count": 0
+    },
+    {
+      "hour": 13,
+      "count": 0
+    },
+    {
+      "hour": 14,
+      "count": 0
+    },
+    {
+      "hour": 15,
+      "count": 0
+    },
+    {
+      "hour": 16,
+      "count": 0
+    },
+    {
+      "hour": 17,
+      "count": 0
+    },
+    {
+      "hour": 18,
+      "count": 0
+    },
+    {
+      "hour": 19,
+      "count": 0
+    },
+    {
+      "hour": 20,
+      "count": 0
+    },
+    {
+      "hour": 21,
+      "count": 0
+    },
+    {
+      "hour": 22,
+      "count": 0
+    },
+    {
+      "hour": 23,
+      "count": 0
+    }
+  ],
+  "bike_breakdown": [
+    {
+      "bike_type": "Mens bicycle",
+      "count": 26693
+    },
+    {
+      "bike_type": "Womens bicycle",
+      "count": 15064
+    },
+    {
+      "bike_type": "Bicycle",
+      "count": 10073
+    },
+    {
+      "bike_type": "Childrens bicycle",
+      "count": 2476
+    },
+    {
+      "bike_type": "Mountain bike",
+      "count": 2296
+    },
+    {
+      "bike_type": "Various bicycles",
+      "count": 1650
+    },
+    {
+      "bike_type": "Racing bike",
+      "count": 1232
+    },
+    {
+      "bike_type": "Cargo bike",
+      "count": 223
+    }
+  ],
+  "avg_damage_by_district": [
+    {
+      "district": "Treptow-K\u00f6penick",
+      "damage": 1337.6380525304291
+    },
+    {
+      "district": "Charlottenburg-Wilmersdorf",
+      "damage": 1315.5912797470462
+    },
+    {
+      "district": "Steglitz-Zehlendorf",
+      "damage": 1312.3244385733158
+    },
+    {
+      "district": "Mitte",
+      "damage": 1276.951974279112
+    },
+    {
+      "district": "Spandau",
+      "damage": 1256.2337259764415
+    },
+    {
+      "district": "Lichtenberg",
+      "damage": 1237.080183585313
+    },
+    {
+      "district": "Tempelhof-Sch\u00f6neberg",
+      "damage": 1218.9867383512544
+    },
+    {
+      "district": "Friedrichshain-Kreuzberg",
+      "damage": 1191.9641965029143
+    },
+    {
+      "district": "Pankow",
+      "damage": 1137.0573541724812
+    },
+    {
+      "district": "Neuk\u00f6lln",
+      "damage": 1136.0062045357295
+    },
+    {
+      "district": "Marzahn-Hellersdorf",
+      "damage": 1102.4763897190676
+    },
+    {
+      "district": "Reinickendorf",
+      "damage": 1023.8780487804878
+    }
+  ]
+}

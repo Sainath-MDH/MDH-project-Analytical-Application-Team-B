@@ -1,0 +1,35 @@
+{
+  "districts": [
+    "Charlottenburg-Wilmersdorf",
+    "Friedrichshain-Kreuzberg",
+    "Lichtenberg",
+    "Marzahn-Hellersdorf",
+    "Mitte",
+    "Neuk\u00f6lln",
+    "Pankow",
+    "Reinickendorf",
+    "Spandau",
+    "Steglitz-Zehlendorf",
+    "Tempelhof-Sch\u00f6neberg",
+    "Treptow-K\u00f6penick"
+  ],
+  "bike_types": [
+    "Bicycle",
+    "Cargo bike",
+    "Childrens bicycle",
+    "Mens bicycle",
+    "Mountain bike",
+    "Racing bike",
+    "Various bicycles",
+    "Womens bicycle"
+  ],
+  "offence_types": [
+    "Bicycle theft",
+    "Cellar and attic burglary"
+  ],
+  "years": [
+    2023,
+    2024,
+    2025
+  ]
+}
