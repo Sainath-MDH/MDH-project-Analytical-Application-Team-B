@@ -75,6 +75,26 @@ def process_data(file_path):
 
     df['district'] = df['lor'].apply(get_district)
     
+    # Process LOR to BZR/PGR Name
+    try:
+        hierarchy_df = pd.read_excel('berlin_LOR_hierarchy.xlsx', sheet_name='PGR')
+        # Map first 4 digits of LOR (as int) to PGR Name
+        pgr_mapping = hierarchy_df.set_index('PGR Code')['PGR Name'].to_dict()
+        
+        def get_bzr_name(lor):
+            try:
+                # First 4 digits of 8-digit LOR
+                lor_str = str(lor).split('.')[0].zfill(8)
+                pgr_id = int(lor_str[:4])
+                return pgr_mapping.get(pgr_id, "Unknown BZR")
+            except:
+                return "Unknown BZR"
+        
+        df['bzr_name'] = df['lor'].apply(get_bzr_name)
+    except Exception as e:
+        print(f"Warning: Could not load BZR mapping: {e}")
+        df['bzr_name'] = "Unknown BZR"
+
     # Normalize Bike Type
     df['bike_type'] = df['bike_type'].map(bike_type_map).fillna(df['bike_type'])
     
@@ -94,7 +114,7 @@ def process_data(file_path):
     df['start_date_str'] = df['start_date'].dt.strftime('%Y-%m-%d')
     
     # Prepare output data
-    output_cols = ['start_date_str', 'start_hour', 'district', 'damage', 'bike_type', 'offence_type', 'year', 'month', 'weekday']
+    output_cols = ['start_date_str', 'start_hour', 'district', 'bzr_name', 'damage', 'bike_type', 'offence_type', 'year', 'month', 'weekday']
     # Final cleanup to match JSON format
     clean_df = df[output_cols].copy()
     clean_df = clean_df.rename(columns={'start_date_str': 'start_date'})
@@ -104,18 +124,19 @@ def process_data(file_path):
 
     # Save clean data
     os.makedirs('data', exist_ok=True)
-    with open('data/thefts_clean.json', 'w') as f:
+    with open('data/thefts_clean.json', 'w', encoding='utf-8') as f:
         json.dump(clean_data, f, indent=2)
     
     # Save dimension tables
     dimensions = {
         'districts': sorted(df['district'].unique().tolist()),
+        'bzr_names': sorted(df['bzr_name'].unique().tolist()),
         'bike_types': sorted(df['bike_type'].dropna().unique().tolist()),
         'offence_types': sorted(df['offence_type'].dropna().unique().tolist()),
         'years': sorted(df['year'].unique().tolist())
     }
     
-    with open('data/dimensions.json', 'w') as f:
+    with open('data/dimensions.json', 'w', encoding='utf-8') as f:
         json.dump(dimensions, f, indent=2)
         
     print(f"Processed {len(clean_data)} records.")
