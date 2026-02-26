@@ -93,8 +93,7 @@ def render_analytics_page(filtered_df):
         fig_dist = px.bar(dist_df, x='count', y='district', orientation='h',
                         labels={'count': 'Number of Thefts', 'district': 'District'},
                         template="plotly_dark",
-                        color='count',
-                        color_continuous_scale='Blues')
+                        color_discrete_sequence=['#00d4ff'])
         fig_dist.update_layout(showlegend=False)
         st.plotly_chart(fig_dist, use_container_width=True)
 
@@ -126,18 +125,31 @@ def render_analytics_page(filtered_df):
     day_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
     # Check if weekday values exist in data
     if 'weekday' in filtered_df.columns and not filtered_df.empty:
-        week_df = filtered_df.groupby('weekday').size().reindex(day_order).reset_index(name='count')
-        fig_week = px.line_polar(week_df, r='count', theta='weekday', line_close=True,
+        # Group by weekday and year for multi-year comparison
+        week_df = filtered_df.groupby(['weekday', 'year']).size().reset_index(name='count')
+        # Ensure year is categorical for distinct colors
+        week_df['year'] = week_df['year'].astype(str)
+        # Reorder weekdays correctly
+        week_df['weekday'] = pd.Categorical(week_df['weekday'], categories=day_order, ordered=True)
+        week_df = week_df.sort_values(['weekday', 'year'])
+
+        fig_week = px.bar(week_df, x='weekday', y='count', color='year',
+                                barmode='group',
+                                labels={'count': 'Number of Thefts', 'weekday': 'Day of Week', 'year': 'Year'},
                                 template="plotly_dark",
-                                color_discrete_sequence=['#00ffa2'])
-        fig_week.update_traces(fill='toself')
-        fig_week.update_layout(showlegend=False)
+                                color_discrete_sequence=px.colors.qualitative.Safe)
+        
+        fig_week.update_layout(
+            legend=dict(font=dict(color='white')),
+            xaxis=dict(tickfont=dict(color='white')),
+            yaxis=dict(tickfont=dict(color='white'))
+        )
         st.plotly_chart(fig_week, use_container_width=True)
     else:
         st.info("No weekday data available for the current selection.")
 
 def render_raw_data_page(filtered_df):
-    st.subheader("📋 Raw Incident Data")
+    st.subheader("📋 Interactive with All Data")
     st.markdown("Downloadable table of all filtered bike theft records.")
     
     # Add a search bar for the table
@@ -166,23 +178,20 @@ def render_damage_analysis_page(filtered_df):
         st.warning("No data available for the current filters.")
         return
 
-    # Local District Filter (Dropdown + Search)
+    # Local District Filter (Searchable Dropdown)
     st.markdown("---")
     dist_all = sorted(filtered_df['district'].unique().tolist())
     
-    col_f1, col_f2 = st.columns([1, 1])
-    with col_f1:
-        selected_local_dist = st.selectbox("🏘️ Filter by District (Dropdown)", ["All Districts"] + dist_all)
-    with col_f2:
-        local_search = st.text_input("🔍 Search District", "", help="Type to filter by district name")
+    # Center the filter
+    buff, col, buff2 = st.columns([1, 2, 1])
+    with col:
+        selected_local_dist = st.selectbox("🏘️ Search or Select District", ["Select All"] + dist_all)
     st.markdown("---")
 
-    # Apply local filters
+    # Apply local filter
     local_filtered = filtered_df
-    if selected_local_dist != "All Districts":
+    if selected_local_dist != "Select All":
         local_filtered = local_filtered[local_filtered['district'] == selected_local_dist]
-    if local_search:
-        local_filtered = local_filtered[local_filtered['district'].str.contains(local_search, case=False, na=False)]
 
     if local_filtered.empty:
         st.warning("No data found for the selected local filters.")
@@ -241,23 +250,20 @@ def render_bzr_analysis_page(filtered_df):
         st.warning("No data available.")
         return
 
-    # Local District Filter (Dropdown + Search)
+    # Local District Filter (Searchable Dropdown)
     st.markdown("---")
     dist_all = sorted(filtered_df['district'].unique().tolist())
     
-    col_f1, col_f2 = st.columns([1, 1])
-    with col_f1:
-        selected_local_dist = st.selectbox("🏘️ Filter by District (Dropdown)", ["All Districts"] + dist_all, key="bzr_dist_sel")
-    with col_f2:
-        local_search = st.text_input("🔍 Search District", "", key="bzr_dist_search", help="Type to filter by district name")
+    # Center the filter
+    buff, col, buff2 = st.columns([1, 2, 1])
+    with col:
+        selected_local_dist = st.selectbox("🏘️ Search or Select District", ["Select All"] + dist_all, key="bzr_dist_sel")
     st.markdown("---")
 
-    # Apply local filters
+    # Apply local filter
     local_filtered = filtered_df
-    if selected_local_dist != "All Districts":
+    if selected_local_dist != "Select All":
         local_filtered = local_filtered[local_filtered['district'] == selected_local_dist]
-    if local_search:
-        local_filtered = local_filtered[local_filtered['district'].str.contains(local_search, case=False, na=False)]
 
     if local_filtered.empty:
         st.warning("No data found for the selected local filters.")
@@ -318,7 +324,7 @@ def render_bzr_analysis_page(filtered_df):
         )
         
         # Improve layout
-        fig_trend.update_layout(xaxis={'categoryorder':'array', 'categoryarray':list(month_names.values())}, showlegend=False)
+        fig_trend.update_layout(xaxis={'categoryorder':'array', 'categoryarray':list(month_names.values())}, showlegend=True)
         st.plotly_chart(fig_trend, use_container_width=True)
     else:
         st.info("No trend data available for the current selection.")
@@ -363,12 +369,37 @@ def main():
         st.error(f"Error loading data: {e}. Please ensure '3_Bike_Thefts_FINAL_EXCEL.xlsx' is in the project root.")
         return
 
-    # Sidebar Navigation Only
-    st.sidebar.markdown("## 📍 Navigation")
-    page = st.sidebar.radio("Select View", ["Analytics Dashboard", "Damage Analysis", "BZR Analysis", "Raw Data"], label_visibility="collapsed")
+    # Initialize session state for navigation
+    if 'page' not in st.session_state:
+        st.session_state.page = "Overview Dashboard"
 
-    # Render Filters ONLY on the Raw Data page
-    if page == "Raw Data":
+    # Sidebar Menu
+    st.sidebar.markdown("## Menu")
+    
+    # Navigation Buttons with Highlighting
+    pages = {
+        "Overview Dashboard": "Overview Dashboard",
+        "Damage Analysis": "💰 Damage Analysis",
+        "Incident Analytics": "Incident Analytics",
+        "Interactive with All Data": "📋 Interactive with All Data"
+    }
+
+    for page_id, label in pages.items():
+        is_active = st.session_state.page == page_id
+        display_label = f"➤ {label}" if is_active else label
+        if st.sidebar.button(
+            display_label, 
+            use_container_width=True, 
+            type="primary" if is_active else "secondary",
+            key=f"nav_{page_id}"
+        ):
+            st.session_state.page = page_id
+            st.rerun()
+
+    page = st.session_state.page
+
+    # Render Filters ONLY on the Interactive page
+    if page == "Interactive with All Data":
         date_range, selected_districts, selected_bikes, selected_offences = render_filters(df)
     else:
         # Provide default "all" values when filters are hidden
@@ -387,13 +418,13 @@ def main():
     
     filtered_df = df[mask]
 
-    if page == "Analytics Dashboard":
+    if page == "Overview Dashboard":
         render_analytics_page(filtered_df)
     elif page == "Damage Analysis":
         render_damage_analysis_page(filtered_df)
-    elif page == "BZR Analysis":
+    elif page == "Incident Analytics":
         render_bzr_analysis_page(filtered_df)
-    elif page == "Raw Data":
+    elif page == "Interactive with All Data":
         render_raw_data_page(filtered_df)
 
 if __name__ == "__main__":
