@@ -24,32 +24,17 @@ This project delivers a modular analytical application that transforms raw datas
 
 ## **🏗️ Architecture**
 
-```
-data/
-│── raw/               # Original datasets
-│── processed/         # Cleaned and transformed data
+- `app/Home.py`: Main entry point for the multi-page dashboard.
+- `app/pages/`: Modular analytics pages (Overview, Damage, Raw Data).
+- `utils/`: Core processing logic:
+    - `data_loader.py`: Specialized Excel ingestion using Calamine.
+    - `preprocess.py`: ETL, cleaning, and geographic enrichment.
+    - `analytics.py`: Computational metrics and aggregations.
+    - `insights.py`: Narrative summary generation.
+- `data/raw/`: Original administrative datasets.
+- `data/processed/`: Automated storage for cleaned JSON repositories.
+- `deployment/`: Configuration for cloud hosting.
 
-app/
-│── Home.py            # Landing page
-│── pages/
-│     ├── Page1.py     # Analytics module 1
-│     ├── Page2.py     # Analytics module 2
-│     ├── Page3.py     # Analytics module 3
-│     └── ...          # Additional modules
-
-utils/
-│── data_loader.py     # Data ingestion utilities
-│── preprocess.py      # Cleaning and transformation
-│── charts.py          # Visualization utilities
-
-deployment/
-│── config files        # Deployment setup (Streamlit Cloud / Render)
-
-README.md
-requirements.txt
-```
-
----
 
 ## **🛠️ Tech Stack**
 
