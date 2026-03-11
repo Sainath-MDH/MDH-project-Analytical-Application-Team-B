@@ -62,19 +62,9 @@ requirements.txt
 
 ---
 
-## **📸 Screenshots**
-
-_Add your screenshots here:_
-
-- Dashboard overview  
-- Example visualization  
-- Filters and interactions  
-
----
-
 ## **🚀 Live Demo**
 
-_Add your deployed app link here once ready._
+https://mdh-project-analytical-application-team-b-go3kc3ufrawhegsug8zt.streamlit.app/
 
 ---
 
